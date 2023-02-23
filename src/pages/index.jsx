@@ -1,3 +1,10 @@
+import About from '@/components/home/About'
+import Explain from '@/components/home/Explain'
+import Featured from '@/components/home/Featured'
+import Pairing from '@/components/home/Pairing'
+import Footer from '@/layout/Footer'
+import Header from '@/layout/Header'
+import Hero from '@/layout/Hero'
 import { Box, Text } from '@chakra-ui/react'
 import Head from 'next/head'
 
@@ -11,9 +18,10 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
-        <Box>
-          <Text> Hello World</Text>
-        </Box>
+        <Hero />
+        <Featured />
+        <Pairing />
+        <About />
       </main>
     </>
   )
