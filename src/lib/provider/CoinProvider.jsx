@@ -8,7 +8,7 @@ const CoinProvider = ({ children }) => {
   const result = useQuery({
     queryKey: ['coin-data'],
     queryFn: () =>
-      fetch('https://api.minerstat.com/v2/coins')
+      fetch('/api/currency')
         .then((res) => res.json())
         .then((data) => data),
     refetchOnWindowFocus: false
