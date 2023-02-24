@@ -32,7 +32,7 @@ export default function Header() {
         <Flex minH={'60px'} align={'center'}>
           <Flex flex={{ base: 1 }} justify={{ base: 'start', md: 'start' }}>
             <Text
-              textAlign={useBreakpointValue({ base: 'left', md: 'left' })}
+              textAlign={{ base: 'left', md: 'left' }}
               fontFamily={'heading'}
               color={useColorModeValue('gray.800', 'white')}>
               Logo

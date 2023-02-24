@@ -11,8 +11,9 @@ import {
 import Head from 'next/head'
 import React from 'react'
 import { useQRCode } from 'next-qrcode'
+import Layout from '@/layout'
 
-const StepTwo = () => {
+const Page = () => {
   const { Canvas } = useQRCode()
   return (
     <>
@@ -71,5 +72,8 @@ const StepTwo = () => {
     </>
   )
 }
+Page.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>
+}
 
-export default StepTwo
+export default Page

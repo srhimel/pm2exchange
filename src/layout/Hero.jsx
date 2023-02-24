@@ -20,7 +20,7 @@ import {
   NumberInputField
 } from '@chakra-ui/react'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 const items = [
   {
@@ -83,6 +83,7 @@ export const CurrencyForm = () => {
   const [receiveAmount, setReceiveAmount] = useState(0)
   const [walletAddress, setWalletAddress] = useState('')
   const [emailAddress, setEmailAddress] = useState('')
+  const [conversionRate, setConversionRate] = useState(0)
   const [data, setData] = useState({})
 
   useEffect(() => {
@@ -97,20 +98,22 @@ export const CurrencyForm = () => {
     }
   }, [])
 
-  console.log(data)
-
   const getCurrencyIcon = (key) => {
     const item = items.find((i) => i.key === key)
     return item?.icon
   }
 
-  const getReceiveAmount = (amount, currOne, currTwo) => {
-    setGivenAmount(amount)
-    const inCurr = data.rates[currOne]
-    const outCurr = data.rates[currTwo]
-    const rate = (inCurr / outCurr).toFixed(8)
-    setReceiveAmount(rate * amount)
-  }
+  const getReceiveAmount = useCallback(
+    (amount, currOne, currTwo) => {
+      setGivenAmount(amount)
+      const inCurr = data.rates[currOne]
+      const outCurr = data.rates[currTwo]
+      const rate = (inCurr / outCurr).toFixed(8)
+      setConversionRate(rate)
+      setReceiveAmount(rate * amount)
+    },
+    [data.rates]
+  )
 
   const getCurrencyName = (key) => {
     const item = items.find((i) => i.key === key)
@@ -124,7 +127,15 @@ export const CurrencyForm = () => {
   }
 
   const handleFormSubmit = () => {
-    alert('ok')
+    console.log({
+      currencyOne,
+      currencyTwo,
+      givenAmount,
+      receiveAmount,
+      walletAddress,
+      emailAddress,
+      conversionRate
+    })
   }
 
   return (

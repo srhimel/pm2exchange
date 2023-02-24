@@ -2,6 +2,8 @@ import About from '@/components/home/About'
 import Explain from '@/components/home/Explain'
 import Featured from '@/components/home/Featured'
 import Pairing from '@/components/home/Pairing'
+import Testimonials from '@/components/Testimonials'
+import Layout from '@/layout'
 import Footer from '@/layout/Footer'
 import Header from '@/layout/Header'
 import Hero from '@/layout/Hero'
@@ -22,7 +24,12 @@ export default function Home() {
         <Featured />
         <Pairing />
         <About />
+        <Testimonials />
       </main>
     </>
   )
+}
+
+Home.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>
 }
