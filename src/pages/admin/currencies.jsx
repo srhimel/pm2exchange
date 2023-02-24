@@ -8,7 +8,7 @@ const Page = () => {
     data &&
     data.map((i) => {
       return {
-        name: i.name,
+        label: i.name,
         icon: `https://static-ssl.minerstat.farm/32/${i.reward_unit.toLowerCase()}.png`,
         key: i.reward_unit
       }

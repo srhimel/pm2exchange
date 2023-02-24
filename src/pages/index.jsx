@@ -6,7 +6,7 @@ import Testimonials from '@/components/Testimonials'
 import Layout from '@/layout'
 import Footer from '@/layout/Footer'
 import Header from '@/layout/Header'
-import Hero from '@/layout/Hero'
+import Hero from '@/components/home/Hero'
 import { Box, Text } from '@chakra-ui/react'
 import Head from 'next/head'
 
