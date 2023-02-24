@@ -113,7 +113,7 @@ const CurrencyListItem = ({ item, refetch, preData }) => {
       <Modal isOpen={isOpen} onClose={onClose} size='lg'>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add New Currency</ModalHeader>
+          <ModalHeader>Edit {item.label}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Formik

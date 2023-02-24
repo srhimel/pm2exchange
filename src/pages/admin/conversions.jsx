@@ -1,10 +1,22 @@
+import ConversionItem from '@/components/admin/conversions/ConversionItem'
 import Layout from '@/layout/admin/Layout'
+import { Box, Grid } from '@chakra-ui/react'
 import React from 'react'
 
 const convertions = [
   {
-    currencyFrom: 'BTC',
-    currencyTo: 'ETH',
+    currencyFrom: JSON.stringify({
+      label: 'SixEleven',
+      icon: 'https://assets.coinlayer.com/icons/611.png',
+      key: '611',
+      walletAddress: 'XHJJHHFD545644DDSJ5641DSSDSKJHHJ555'
+    }),
+    currencyTo: JSON.stringify({
+      label: 'AB-Chain',
+      icon: 'https://assets.coinlayer.com/icons/ABC.png',
+      key: 'ABC',
+      walletAddress: 'XHJJHHFD545644DDSJ5641DSSDSKJHHJ555'
+    }),
     givenAmount: '50',
     receiveAmount: 79555.54545454,
     walletAddress: 'XHJJHHFD545644DDSJ5641DSSDSKJHHJ555',
@@ -14,8 +26,18 @@ const convertions = [
     status: 'PENDING'
   },
   {
-    currencyFrom: 'ETH',
-    currencyTo: 'DOGE',
+    currencyFrom: JSON.stringify({
+      label: 'SixEleven',
+      icon: 'https://assets.coinlayer.com/icons/611.png',
+      key: '611',
+      walletAddress: 'XHJJHHFD545644DDSJ5641DSSDSKJHHJ555'
+    }),
+    currencyTo: JSON.stringify({
+      label: 'AB-Chain',
+      icon: 'https://assets.coinlayer.com/icons/ABC.png',
+      key: 'ABC',
+      walletAddress: 'XHJJHHFD545644DDSJ5641DSSDSKJHHJ555'
+    }),
     givenAmount: '75',
     receiveAmount: 3546568.2167,
     walletAddress: 'DXZHUJ897676FHDHJGKJHJGJ67887FHG',
@@ -25,8 +47,18 @@ const convertions = [
     status: 'PROCESSING'
   },
   {
-    currencyFrom: 'USD',
-    currencyTo: 'EUR',
+    currencyFrom: JSON.stringify({
+      label: 'SixEleven',
+      icon: 'https://assets.coinlayer.com/icons/611.png',
+      key: '611',
+      walletAddress: 'XHJJHHFD545644DDSJ5641DSSDSKJHHJ555'
+    }),
+    currencyTo: JSON.stringify({
+      label: 'AB-Chain',
+      icon: 'https://assets.coinlayer.com/icons/ABC.png',
+      key: 'ABC',
+      walletAddress: 'XHJJHHFD545644DDSJ5641DSSDSKJHHJ555'
+    }),
     givenAmount: '1000',
     receiveAmount: 839.2,
     walletAddress: 'ASDFHJKUJ567898UYTR5678YHBGTREW12',
@@ -36,9 +68,18 @@ const convertions = [
     status: 'CONFIRMED'
   },
   {
-    currencyFrom: 'GBP',
-    currencyTo: 'AUD',
-    givenAmount: '2500',
+    currencyFrom: JSON.stringify({
+      label: 'SixEleven',
+      icon: 'https://assets.coinlayer.com/icons/611.png',
+      key: '611',
+      walletAddress: 'XHJJHHFD545644DDSJ5641DSSDSKJHHJ555'
+    }),
+    currencyTo: JSON.stringify({
+      label: 'AB-Chain',
+      icon: 'https://assets.coinlayer.com/icons/ABC.png',
+      key: 'ABC',
+      walletAddress: 'XHJJHHFD545644DDSJ5641DSSDSKJHHJ555'
+    }),
     receiveAmount: 4491.875,
     walletAddress: 'KJHGFDSA321YTREWQ12UYTGFDSAWQ1234',
     emailAddress: 'bobsmith@example.com',
@@ -47,8 +88,18 @@ const convertions = [
     status: 'CONFIRMED'
   },
   {
-    currencyFrom: 'XRP',
-    currencyTo: 'LTC',
+    currencyFrom: JSON.stringify({
+      label: 'SixEleven',
+      icon: 'https://assets.coinlayer.com/icons/611.png',
+      key: '611',
+      walletAddress: 'XHJJHHFD545644DDSJ5641DSSDSKJHHJ555'
+    }),
+    currencyTo: JSON.stringify({
+      label: 'AB-Chain',
+      icon: 'https://assets.coinlayer.com/icons/ABC.png',
+      key: 'ABC',
+      walletAddress: 'XHJJHHFD545644DDSJ5641DSSDSKJHHJ555'
+    }),
     givenAmount: '350',
     receiveAmount: 6.0835536,
     walletAddress: 'FJHGGYR6789UJNBVGFT678UIJHGTY6778',
@@ -58,8 +109,18 @@ const convertions = [
     status: 'CANCELLED'
   },
   {
-    currencyFrom: 'BCH',
-    currencyTo: 'ADA',
+    currencyFrom: JSON.stringify({
+      label: 'SixEleven',
+      icon: 'https://assets.coinlayer.com/icons/611.png',
+      key: '611',
+      walletAddress: 'XHJJHHFD545644DDSJ5641DSSDSKJHHJ555'
+    }),
+    currencyTo: JSON.stringify({
+      label: 'AB-Chain',
+      icon: 'https://assets.coinlayer.com/icons/ABC.png',
+      key: 'ABC',
+      walletAddress: 'XHJJHHFD545644DDSJ5641DSSDSKJHHJ555'
+    }),
     givenAmount: '150',
     receiveAmount: 462.583333,
     walletAddress: 'PLKJHGFDSA123456YTREWQ67890MNHYT',
@@ -71,7 +132,22 @@ const convertions = [
 ]
 
 const Page = () => {
-  return <div>i am admin</div>
+  return (
+    <Box>
+      <Grid
+        templateColumns={{
+          base: 'repeat(1,1fr)',
+          md: 'repeat(2,1fr)',
+          lg: 'repeat(3,1fr)',
+          xl: 'repeat(4,1fr)'
+        }}
+        gap={6}>
+        {convertions.map((i, index) => (
+          <ConversionItem key={index} data={i} />
+        ))}
+      </Grid>
+    </Box>
+  )
 }
 
 Page.getLayout = function getLayout(page) {
