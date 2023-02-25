@@ -6,7 +6,7 @@ import {
 } from 'server/controller/currencyController'
 import { connectMongo } from 'server/utils/connectMongo'
 
-export default async function addTest(req, res) {
+export default async function Currency(req, res) {
   try {
     await connectMongo()
     switch (req.method) {
