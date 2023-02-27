@@ -1,5 +1,6 @@
 /* eslint-disable react/no-children-prop */
 import Explain from '@/components/home/Explain'
+import useCoin from '@/lib/hooks/useCoin'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import {
   Box,
@@ -19,33 +20,14 @@ import {
   NumberInput,
   NumberInputField
 } from '@chakra-ui/react'
+import axios from 'axios'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 
-const items = [
-  {
-    label: 'Bitcoin',
-    key: 'BTC',
-    icon: '/coins/btc.png'
-  },
-  {
-    label: 'Ethereum',
-    key: 'ETH',
-    icon: '/coins/eth.png'
-  },
-  {
-    label: 'Monero',
-    key: 'XMR',
-    icon: '/coins/xmr.png'
-  },
-  {
-    label: 'Litecoin',
-    key: 'LTC',
-    icon: '/coins/ltc.png'
-  }
-]
-
-export default function Hero() {
+export default function Hero({ data, isLoading }) {
+  const { data: items } = useCoin()
+  console.log({ data, items })
   return (
     <Box
       bgImage={'./shape.svg'}
@@ -68,7 +50,7 @@ export default function Hero() {
           <Text color={'green.900'} fontSize='xl' mt={'25px !important'}>
             Instant exchanges, make your exchange or payment now
           </Text>
-          <CurrencyForm />
+          <CurrencyForm items={items} data={data} />
         </Stack>
       </Container>
       <Explain />
@@ -76,27 +58,18 @@ export default function Hero() {
   )
 }
 
-export const CurrencyForm = () => {
+export const CurrencyForm = ({ items, data }) => {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+  const [currencyOneKey, setCurrencyOneKey] = useState('')
   const [currencyOne, setCurrencyOne] = useState('')
+  const [currencyTwoKey, setCurrencyTwoKey] = useState('')
   const [currencyTwo, setCurrencyTwo] = useState('')
   const [givenAmount, setGivenAmount] = useState(0)
   const [receiveAmount, setReceiveAmount] = useState(0)
   const [walletAddress, setWalletAddress] = useState('')
   const [emailAddress, setEmailAddress] = useState('')
   const [conversionRate, setConversionRate] = useState(0)
-  const [data, setData] = useState({})
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('./rates.json')
-      const resData = await response.json()
-      setData(resData)
-    }
-    fetchData()
-    return () => {
-      console.log('This will be logged on unmount')
-    }
-  }, [])
 
   const getCurrencyIcon = (key) => {
     const item = items.find((i) => i.key === key)
@@ -106,13 +79,13 @@ export const CurrencyForm = () => {
   const getReceiveAmount = useCallback(
     (amount, currOne, currTwo) => {
       setGivenAmount(amount)
-      const inCurr = data.rates[currOne]
-      const outCurr = data.rates[currTwo]
+      const inCurr = data?.rates[currOne]
+      const outCurr = data?.rates[currTwo]
       const rate = (inCurr / outCurr).toFixed(8)
       setConversionRate(rate)
       setReceiveAmount(rate * amount)
     },
-    [data.rates]
+    [data?.rates]
   )
 
   const getCurrencyName = (key) => {
@@ -121,21 +94,46 @@ export const CurrencyForm = () => {
   }
 
   const getConversionRate = (currOne, currTwo) => {
-    const inCurr = data.rates[currOne]
-    const outCurr = data.rates[currTwo]
+    const inCurr = data?.rates[currOne]
+    const outCurr = data?.rates[currTwo]
     return (inCurr / outCurr).toFixed(8)
+  }
+  const handleCurrencyTwoChange = (e) => {
+    const currTwo = JSON.parse(e.target.value)
+    const currTwoKey = currTwo.key
+    setCurrencyTwoKey(currTwoKey)
+    setCurrencyTwo(currTwo)
+    if (currencyOneKey && givenAmount) {
+      const rate = getConversionRate(currencyOneKey, currTwoKey)
+      setReceiveAmount(rate * givenAmount)
+    }
+  }
+
+  const handleCurrencyOneChange = (e) => {
+    const currOne = JSON.parse(e.target.value)
+    const currOneKey = currOne.key
+    setCurrencyOneKey(currOneKey)
+    setCurrencyOne(currOne)
+    if (currencyTwoKey && givenAmount) {
+      const rate = getConversionRate(currOneKey, currencyTwoKey)
+      setReceiveAmount(rate * givenAmount)
+    }
   }
 
   const handleFormSubmit = () => {
-    console.log({
-      currencyOne,
-      currencyTwo,
-      givenAmount,
-      receiveAmount,
-      walletAddress,
-      emailAddress,
-      conversionRate
-    })
+    setLoading(true)
+    axios
+      .post('/api/conversion', {
+        currencyFrom: currencyOne,
+        currencyTo: currencyTwo,
+        givenAmount,
+        receiveAmount,
+        walletAddress,
+        emailAddress,
+        conversionRate
+      })
+      .then((res) => router.push(`/step-2?id=${res.data._id}`))
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -153,12 +151,14 @@ export const CurrencyForm = () => {
               roundedTopEnd={5}
               roundedTopStart={0}
               roundedBottomStart={0}
-              onChange={(e) => setCurrencyOne(e.target.value)}>
-              {items.map((item) => (
-                <option value={item.key} key={item.key}>
-                  {item.label}
-                </option>
-              ))}
+              onChange={(e) => handleCurrencyOneChange(e)}>
+              {items?.length
+                ? items.map((item) => (
+                    <option value={JSON.stringify(item)} key={item.key}>
+                      {item.label} - {item.key}
+                    </option>
+                  ))
+                : ''}
             </Select>
           </InputGroup>
         </Box>
@@ -174,21 +174,23 @@ export const CurrencyForm = () => {
               roundedTopEnd={5}
               roundedTopStart={0}
               roundedBottomStart={0}
-              onChange={(e) => setCurrencyTwo(e.target.value)}>
-              {items.map((item) => (
-                <option value={item.key} key={item.key}>
-                  {item.label}
-                </option>
-              ))}
+              onChange={(e) => handleCurrencyTwoChange(e)}>
+              {items?.length
+                ? items.map((item) => (
+                    <option value={JSON.stringify(item)} key={item.key}>
+                      {item.label} - {item.key}
+                    </option>
+                  ))
+                : ''}
             </Select>
           </InputGroup>
         </Box>
       </Stack>
-      {currencyOne && currencyTwo ? (
+      {currencyOneKey && currencyTwoKey ? (
         <>
           <HStack gap={5} justify='center' mt={5} mb={3}>
             <Image
-              src={getCurrencyIcon(currencyOne)}
+              src={getCurrencyIcon(currencyOneKey)}
               height={50}
               width={50}
               alt=''
@@ -200,7 +202,7 @@ export const CurrencyForm = () => {
               alt=''
             />
             <Image
-              src={getCurrencyIcon(currencyTwo)}
+              src={getCurrencyIcon(currencyTwoKey)}
               height={50}
               width={50}
               alt=''
@@ -208,9 +210,9 @@ export const CurrencyForm = () => {
           </HStack>
           <Box>
             <Text color={'gray.600'}>
-              1 {getCurrencyName(currencyOne)} ={' '}
-              {getConversionRate(currencyOne, currencyTwo)}{' '}
-              {getCurrencyName(currencyTwo)}
+              1 {getCurrencyName(currencyOneKey)} ={' '}
+              {getConversionRate(currencyOneKey, currencyTwoKey)}{' '}
+              {getCurrencyName(currencyTwoKey)}
             </Text>
           </Box>
           <Stack
@@ -221,25 +223,27 @@ export const CurrencyForm = () => {
             <NumberInput
               size={'lg'}
               onChange={(amount) =>
-                getReceiveAmount(amount, currencyOne, currencyTwo)
+                getReceiveAmount(amount, currencyOneKey, currencyTwoKey)
               }
               w='full'>
               <NumberInputField
-                placeholder={`${getCurrencyName(currencyOne)} to exchange`}
+                placeholder={`${getCurrencyName(currencyOneKey)} to exchange`}
               />
             </NumberInput>
             {receiveAmount === 0 ? (
               <>
                 <Input
                   size={'lg'}
-                  placeholder={`${getCurrencyName(currencyTwo)} to receive`}
+                  placeholder={`${getCurrencyName(currencyTwoKey)} to receive`}
                 />
               </>
             ) : (
               <>
                 <NumberInput value={receiveAmount} size={'lg'} w='full'>
                   <NumberInputField
-                    placeholder={`${getCurrencyName(currencyTwo)} to receive`}
+                    placeholder={`${getCurrencyName(
+                      currencyTwoKey
+                    )} to receive`}
                   />
                 </NumberInput>
               </>
@@ -249,7 +253,7 @@ export const CurrencyForm = () => {
             my='4'
             size={'lg'}
             placeholder={`Enter your ${getCurrencyName(
-              currencyTwo
+              currencyTwoKey
             )} wallet address`}
             onChange={(e) => setWalletAddress(e.target.value)}
           />
@@ -268,7 +272,8 @@ export const CurrencyForm = () => {
         w={'full'}
         mt={5}
         size='lg'
-        onClick={handleFormSubmit}>
+        onClick={handleFormSubmit}
+        isLoading={loading}>
         Start Exchange
       </Button>
     </Box>

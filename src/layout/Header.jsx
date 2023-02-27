@@ -7,7 +7,6 @@ import {
   Stack,
   Collapse,
   Icon,
-  Link,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -22,6 +21,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon
 } from '@chakra-ui/icons'
+import Link from 'next/link'
 
 export default function Header() {
   const { isOpen, onToggle } = useDisclosure()
@@ -35,7 +35,7 @@ export default function Header() {
               textAlign={{ base: 'left', md: 'left' }}
               fontFamily={'heading'}
               color={useColorModeValue('gray.800', 'white')}>
-              Logo
+              <Link href='/'>BTC2USDT</Link>
             </Text>
 
             <Flex display={{ base: 'none', md: 'flex' }} ml={'auto'}>
@@ -83,7 +83,7 @@ const DesktopNav = () => {
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
               <Link
-                p={2}
+                style={{ padding: '0 10px' }}
                 href={navItem.href ?? '#'}
                 fontSize={'md'}
                 fontWeight={500}
@@ -124,7 +124,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       href={href}
       role={'group'}
       display={'block'}
-      p={2}
+      style={{ padding: '0 20px' }}
       rounded={'md'}
       _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
       <Stack direction={'row'} align={'center'}>
@@ -208,7 +208,7 @@ const MobileNavItem = ({ label, children, href }) => {
           align={'start'}>
           {children &&
             children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
+              <Link key={child.label} py={4} href={child.href}>
                 {child.label}
               </Link>
             ))}
@@ -221,26 +221,22 @@ const MobileNavItem = ({ label, children, href }) => {
 const NAV_ITEMS = [
   {
     label: 'About Us',
-    href: '#'
-  },
-  {
-    label: 'Affiliate',
-    href: '#'
+    href: '/'
   },
   {
     label: 'How it works',
-    href: '#'
+    href: '/'
   },
   {
     label: 'Track Exchange',
-    href: '#'
+    href: '/track-exchange'
   },
   {
     label: 'Blog',
-    href: '#'
+    href: '/'
   },
   {
     label: 'Contact',
-    href: '#'
+    href: '/'
   }
 ]

@@ -85,10 +85,10 @@ const Page = () => {
       </>
     )
 
-  if (!isLoading && data.data.length)
+  if (!isLoading && data?.length)
     content = (
       <>
-        {data.data.map((item) => (
+        {data.map((item) => (
           <CurrencyListItem
             key={item.key}
             item={item}
@@ -99,7 +99,7 @@ const Page = () => {
       </>
     )
 
-  if (!isLoading && !data.data.length) content = <Empty />
+  if (!isLoading && !data?.length) content = <Empty />
 
   return (
     <>
@@ -127,7 +127,7 @@ const Page = () => {
                               <option
                                 value={JSON.stringify(currency)}
                                 key={currency.key}>
-                                {currency.label}
+                                {currency.label} - {currency.key}
                               </option>
                             ))}
                           </Select>
