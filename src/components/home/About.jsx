@@ -16,7 +16,7 @@ const About = (props) => {
       <Container maxW={'container.xl'}>
         <Box maxW={'3xl'} margin='auto'>
           <Heading as='h2' size='2xl' textAlign={'center'} color='green.600'>
-            What is Evonax?
+            What is BTC2USDT?
           </Heading>
           <Text
             color={'gray.600'}

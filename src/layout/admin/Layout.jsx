@@ -35,12 +35,13 @@ import { IconType } from 'react-icons'
 import { ReactText } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 const LinkItems = [
   { name: 'Home', icon: FiHome, path: '/admin/dashboard' },
   { name: 'Conversions', icon: FiTrendingUp, path: '/admin/conversions' },
-  { name: 'Currencies', icon: FiCompass, path: '/admin/currencies' },
-  { name: 'Settings', icon: FiSettings, path: '/admin/settings' }
+  { name: 'Currencies', icon: FiCompass, path: '/admin/currencies' }
+  // { name: 'Settings', icon: FiSettings, path: '/admin/settings' }
 ]
 
 export default function Layout({ children }) {
@@ -72,7 +73,7 @@ export default function Layout({ children }) {
           </DrawerContent>
         </Drawer>
         {/* mobilenav */}
-        <MobileNav onOpen={onOpen} />
+        <MobileNav onOpen={onOpen} onClose={onClose} />
         <Box ml={{ base: 0, md: 60 }} p='4'>
           {children}
         </Box>
@@ -82,6 +83,7 @@ export default function Layout({ children }) {
 }
 
 const SidebarContent = ({ onClose, ...rest }) => {
+  const router = useRouter()
   return (
     <Box
       transition='3s ease'
@@ -99,7 +101,12 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} href={link.path}>
+        <NavItem
+          onClick={onClose}
+          key={link.name}
+          icon={link.icon}
+          href={link.path}
+          className={router.pathname === link.path ? 'active' : 'inActive'}>
           {link.name}
         </NavItem>
       ))}
@@ -165,7 +172,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
         fontSize='2xl'
         fontFamily='monospace'
         fontWeight='bold'>
-        Logo
+        <Link href='/'>BTC2USDT</Link>
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>

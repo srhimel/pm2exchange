@@ -2,7 +2,7 @@ import Layout from '@/layout/admin/Layout'
 import React from 'react'
 
 const Page = () => {
-  return <div>i am admin</div>
+  return <div>Welcome to dashboard!</div>
 }
 
 Page.getLayout = function getLayout(page) {

@@ -105,8 +105,7 @@ const Page = () => {
               />
               <Text my={4}>
                 Please wait a few minutes while we receive your{' '}
-                {currencyFrom?.label} on
-                {currencyFrom?.walletAddress}
+                {currencyFrom?.label} on {currencyFrom?.walletAddress}
               </Text>
             </Box>
 

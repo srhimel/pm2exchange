@@ -29,7 +29,7 @@ export default function Home() {
         <Featured data={data} isLoading={isLoading} />
         <Pairing data={data} isLoading={isLoading} />
         <About />
-        <Testimonials />
+        {/* <Testimonials /> */}
       </main>
     </>
   )

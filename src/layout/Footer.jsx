@@ -76,12 +76,10 @@ export default function Footer() {
           spacing={8}>
           <Stack spacing={6}>
             <Box>
-              <Logo color={useColorModeValue('gray.700', 'white')} />
+              <Text fontSize={'xl'}>BTC2USDT</Text>
             </Box>
-            <Text fontSize={'sm'}>
-              © 2022 Chakra Templates. All rights reserved
-            </Text>
-            <Stack direction={'row'} spacing={6}>
+
+            {/* <Stack direction={'row'} spacing={6}>
               <SocialButton label={'Twitter'} href={'#'}>
                 <FaTwitter />
               </SocialButton>
@@ -91,7 +89,7 @@ export default function Footer() {
               <SocialButton label={'Instagram'} href={'#'}>
                 <FaInstagram />
               </SocialButton>
-            </Stack>
+            </Stack> */}
           </Stack>
           <Stack align={'flex-start'}>
             <ListHeader>Company</ListHeader>
