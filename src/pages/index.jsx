@@ -27,7 +27,7 @@ export default function Home() {
       <main>
         <Hero data={data} isLoading={isLoading} />
         <Featured data={data} isLoading={isLoading} />
-        <Pairing data={data} isLoading={isLoading} />
+        <Pairing rates={data} isLoading={isLoading} />
         <About />
         {/* <Testimonials /> */}
       </main>

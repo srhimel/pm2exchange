@@ -1,3 +1,4 @@
+import useCoin from '@/lib/hooks/useCoin'
 import {
   Box,
   Container,
@@ -5,13 +6,85 @@ import {
   Grid,
   Heading,
   HStack,
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
   Stack,
   Text
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import React from 'react'
 
-const Pairing = () => {
+const Pairing = ({ rates }) => {
+  const { data, isLoading } = useCoin()
+  const getConversionRate = (currOne, currTwo) => {
+    const inCurr = rates?.rates[currOne]
+    const outCurr = rates?.rates[currTwo]
+    return (inCurr / outCurr).toFixed(8)
+  }
+  let content
+  if (isLoading) {
+    content = (
+      <>
+        <SkaletonCoin />
+        <SkaletonCoin />
+        <SkaletonCoin />
+      </>
+    )
+  }
+
+  if (!isLoading && data.length) {
+    const combination = data.slice(0, 7).map((i, _i, a) => {
+      return {
+        first: i,
+        second: a[_i + 1]
+      }
+    })
+    const sortedCombination = combination.filter((i) => i.second)
+
+    content = (
+      <>
+        {sortedCombination.map((i, _i) => (
+          <Box
+            key={`rendam-coin-${_i}`}
+            border={'1px'}
+            rounded='md'
+            borderColor={'gray.200'}>
+            <HStack
+              justifyContent={'space-between'}
+              px={6}
+              py={4}
+              bg='gray.50'
+              rounded='md'>
+              <Box>
+                <HStack>
+                  <Image height={20} width={20} alt='' src={i?.first?.icon} />
+                  <Text>{i?.first?.label}</Text>
+                </HStack>
+              </Box>
+              <Image height={20} width={20} alt='' src='/ic-pair.svg' />
+              <Box>
+                <HStack>
+                  <Image height={20} width={20} alt='' src={i?.second?.icon} />
+                  <Text>{i?.second?.label}</Text>
+                </HStack>
+              </Box>
+            </HStack>
+            <HStack px={6} py={4} gap={5}>
+              <Text color={'gray.500'} fontSize='sm'>
+                Rate:
+              </Text>
+              <Text>{getConversionRate(i?.first?.key, i?.second?.key)}</Text>
+            </HStack>
+          </Box>
+        ))}
+      </>
+    )
+  }
+
+  if (!isLoading && !data.length) {
+    content = <></>
+  }
   return (
     <Box py={'20'}>
       <Container maxW={'container.xl'}>
@@ -38,176 +111,7 @@ const Pairing = () => {
           rowGap={10}
           columnGap={10}
           mt={20}>
-          {/* Single  */}
-          <Box border={'1px'} rounded='md' borderColor={'gray.200'}>
-            <HStack
-              justifyContent={'space-between'}
-              px={6}
-              py={4}
-              bg='gray.50'
-              rounded='md'>
-              <Box>
-                <HStack>
-                  <Image height={20} width={20} alt='' src='/coins/btc.png' />
-                  <Text>Bitcoin</Text>
-                </HStack>
-              </Box>
-              <Image height={20} width={20} alt='' src='/ic-pair.svg' />
-              <Box>
-                <HStack>
-                  <Image height={20} width={20} alt='' src='/coins/eth.png' />
-                  <Text>Etharium</Text>
-                </HStack>
-              </Box>
-            </HStack>
-            <HStack px={6} py={4} gap={5}>
-              <Text color={'gray.500'} fontSize='sm'>
-                Rate:
-              </Text>
-              <Text>14.50320013</Text>
-            </HStack>
-          </Box>
-          {/* Single End */}
-          <Box border={'1px'} rounded='md' borderColor={'gray.200'}>
-            <HStack
-              justifyContent={'space-between'}
-              px={6}
-              py={4}
-              bg='gray.50'
-              rounded='md'>
-              <Box>
-                <HStack>
-                  <Image height={20} width={20} alt='' src='/coins/btc.png' />
-                  <Text>Bitcoin</Text>
-                </HStack>
-              </Box>
-              <Image height={20} width={20} alt='' src='/ic-pair.svg' />
-              <Box>
-                <HStack>
-                  <Image height={20} width={20} alt='' src='/coins/eth.png' />
-                  <Text>Etharium</Text>
-                </HStack>
-              </Box>
-            </HStack>
-            <HStack px={6} py={4} gap={5}>
-              <Text color={'gray.500'} fontSize='sm'>
-                Rate:
-              </Text>
-              <Text>14.50320013</Text>
-            </HStack>
-          </Box>
-          <Box border={'1px'} rounded='md' borderColor={'gray.200'}>
-            <HStack
-              justifyContent={'space-between'}
-              px={6}
-              py={4}
-              bg='gray.50'
-              rounded='md'>
-              <Box>
-                <HStack>
-                  <Image height={20} width={20} alt='' src='/coins/btc.png' />
-                  <Text>Bitcoin</Text>
-                </HStack>
-              </Box>
-              <Image height={20} width={20} alt='' src='/ic-pair.svg' />
-              <Box>
-                <HStack>
-                  <Image height={20} width={20} alt='' src='/coins/eth.png' />
-                  <Text>Etharium</Text>
-                </HStack>
-              </Box>
-            </HStack>
-            <HStack px={6} py={4} gap={5}>
-              <Text color={'gray.500'} fontSize='sm'>
-                Rate:
-              </Text>
-              <Text>14.50320013</Text>
-            </HStack>
-          </Box>
-          <Box border={'1px'} rounded='md' borderColor={'gray.200'}>
-            <HStack
-              justifyContent={'space-between'}
-              px={6}
-              py={4}
-              bg='gray.50'
-              rounded='md'>
-              <Box>
-                <HStack>
-                  <Image height={20} width={20} alt='' src='/coins/btc.png' />
-                  <Text>Bitcoin</Text>
-                </HStack>
-              </Box>
-              <Image height={20} width={20} alt='' src='/ic-pair.svg' />
-              <Box>
-                <HStack>
-                  <Image height={20} width={20} alt='' src='/coins/eth.png' />
-                  <Text>Etharium</Text>
-                </HStack>
-              </Box>
-            </HStack>
-            <HStack px={6} py={4} gap={5}>
-              <Text color={'gray.500'} fontSize='sm'>
-                Rate:
-              </Text>
-              <Text>14.50320013</Text>
-            </HStack>
-          </Box>
-          <Box border={'1px'} rounded='md' borderColor={'gray.200'}>
-            <HStack
-              justifyContent={'space-between'}
-              px={6}
-              py={4}
-              bg='gray.50'
-              rounded='md'>
-              <Box>
-                <HStack>
-                  <Image height={20} width={20} alt='' src='/coins/btc.png' />
-                  <Text>Bitcoin</Text>
-                </HStack>
-              </Box>
-              <Image height={20} width={20} alt='' src='/ic-pair.svg' />
-              <Box>
-                <HStack>
-                  <Image height={20} width={20} alt='' src='/coins/eth.png' />
-                  <Text>Etharium</Text>
-                </HStack>
-              </Box>
-            </HStack>
-            <HStack px={6} py={4} gap={5}>
-              <Text color={'gray.500'} fontSize='sm'>
-                Rate:
-              </Text>
-              <Text>14.50320013</Text>
-            </HStack>
-          </Box>
-          <Box border={'1px'} rounded='md' borderColor={'gray.200'}>
-            <HStack
-              justifyContent={'space-between'}
-              px={6}
-              py={4}
-              bg='gray.50'
-              rounded='md'>
-              <Box>
-                <HStack>
-                  <Image height={20} width={20} alt='' src='/coins/btc.png' />
-                  <Text>Bitcoin</Text>
-                </HStack>
-              </Box>
-              <Image height={20} width={20} alt='' src='/ic-pair.svg' />
-              <Box>
-                <HStack>
-                  <Image height={20} width={20} alt='' src='/coins/eth.png' />
-                  <Text>Etharium</Text>
-                </HStack>
-              </Box>
-            </HStack>
-            <HStack px={6} py={4} gap={5}>
-              <Text color={'gray.500'} fontSize='sm'>
-                Rate:
-              </Text>
-              <Text>14.50320013</Text>
-            </HStack>
-          </Box>
+          {content}
         </Grid>
       </Container>
     </Box>
@@ -215,3 +119,31 @@ const Pairing = () => {
 }
 
 export default Pairing
+
+export const SkaletonCoin = () => {
+  return (
+    <Box border={'1px'} rounded='md' borderColor={'gray.200'}>
+      <HStack
+        justifyContent={'space-between'}
+        px={6}
+        py={4}
+        bg='gray.50'
+        rounded='md'>
+        <Box>
+          <HStack>
+            <SkeletonCircle size='5' />
+            <SkeletonText mt='4' noOfLines={1} spacing='4' skeletonHeight='2' />
+          </HStack>
+        </Box>
+        <SkeletonCircle size='5' />
+        <Box>
+          <HStack>
+            <SkeletonCircle size='5' />
+            <SkeletonText mt='4' noOfLines={1} spacing='4' skeletonHeight='2' />
+          </HStack>
+        </Box>
+      </HStack>
+      <HStack px={6} py={4} gap={5}></HStack>
+    </Box>
+  )
+}

@@ -78,7 +78,9 @@ export default function Footer() {
             <Box>
               <Text fontSize={'xl'}>BTC2USDT</Text>
             </Box>
-
+            <Text fontSize={'sm'}>
+              Copyright &copy; 2023 BTC2USD. All Rights Reserved
+            </Text>
             {/* <Stack direction={'row'} spacing={6}>
               <SocialButton label={'Twitter'} href={'#'}>
                 <FaTwitter />

@@ -24,7 +24,7 @@ const About = (props) => {
             mt={'25px !important'}
             textAlign='center'
             fontWeight={'light'}>
-            Evonax is the one thing missing from the cryptocurrency world. It
+            BTC2USDT is the one thing missing from the cryptocurrency world. It
             offers easy, fast and secure exchanges of the most popular
             cryptocurrencies.
           </Text>

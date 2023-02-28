@@ -26,9 +26,6 @@ export default function ResultItem({ data }) {
     status
   } = data || {}
 
-  const givenCurrency = JSON.parse(currencyFrom)
-  const getCurrency = JSON.parse(currencyTo)
-
   const getStatusColor = (status, type) => {
     if (status === 'PENDING' && type === 'light') {
       return 'yellow.100'
@@ -61,13 +58,13 @@ export default function ResultItem({ data }) {
         boxShadow={'xl'}
         p={6}>
         <HStack justify={'center'} gap={5}>
-          <Image src={givenCurrency.icon} alt='' height={50} width={50} />
+          <Image src={currencyFrom.icon} alt='' height={50} width={50} />
           <Image src={'/exchange-box-logo.png'} alt='' height={50} width={50} />
-          <Image src={getCurrency.icon} alt='' height={50} width={50} />
+          <Image src={currencyTo.icon} alt='' height={50} width={50} />
         </HStack>
 
         <Heading fontSize={'2xl'} fontFamily={'body'} mt={5} textAlign='center'>
-          {givenCurrency.label} to {getCurrency.label}
+          {currencyFrom.label} to {currencyTo.label}
         </Heading>
         <Text fontWeight={600} color={'gray.500'} mb={4} textAlign='center'>
           {emailAddress}
@@ -92,13 +89,13 @@ export default function ResultItem({ data }) {
             <Text as={'span'} fontWeight={'bold'}>
               Given:
             </Text>{' '}
-            {givenAmount} {givenCurrency.key}
+            {givenAmount} {currencyFrom.key}
           </ListItem>
           <ListItem>
             <Text as={'span'} fontWeight={'bold'}>
               Should Receive:
             </Text>{' '}
-            {receiveAmount} {getCurrency.key}
+            {receiveAmount} {currencyTo.key}
           </ListItem>
           <ListItem>
             <Text as={'span'} fontWeight={'bold'}>
@@ -110,7 +107,7 @@ export default function ResultItem({ data }) {
             <Text as={'span'} fontWeight={'bold'}>
               Deposit Address:
             </Text>{' '}
-            {givenCurrency.walletAddress}
+            {currencyFrom.walletAddress}
           </ListItem>
           <ListItem>
             <Text as={'span'} fontWeight={'bold'}>

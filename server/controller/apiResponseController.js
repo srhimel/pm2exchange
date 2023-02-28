@@ -32,6 +32,8 @@ export const getApiResponse = async (req, res) => {
       })
     } else {
       const apiResponse = data[0].response
+      apiResponse['rates']['PL'] = 1
+      apiResponse['rates']['PM'] = 1
       res.status(200).json(apiResponse)
     }
   } catch (error) {

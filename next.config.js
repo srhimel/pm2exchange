@@ -8,6 +8,12 @@ const nextConfig = {
         hostname: 'assets.coinlayer.com',
         port: '',
         pathname: '/icons/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co',
+        port: '',
+        pathname: '/**'
       }
     ]
   }

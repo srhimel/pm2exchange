@@ -9,12 +9,18 @@ import {
   Input,
   Text
 } from '@chakra-ui/react'
+import axios from 'axios'
 import Head from 'next/head'
 import { useState } from 'react'
 
 const Page = () => {
+  const [searchResult, setSearchResult] = useState([])
   const [searchInput, setSearchInput] = useState('')
-  const handleSearch = () => {}
+  const handleSearch = async () => {
+    const res = await axios.get(`/api/track-status?search=${searchInput}`)
+    const data = await res.data
+    setSearchResult(data)
+  }
   return (
     <>
       <Head>
@@ -62,9 +68,15 @@ const Page = () => {
                 </Text>
               </Box>
             </Grid>
-            <Box mt={20}>
-              <Result />
-            </Box>
+            {searchResult?.length ? (
+              <>
+                <Box mt={20}>
+                  <Result searchResult={searchResult} />
+                </Box>
+              </>
+            ) : (
+              <></>
+            )}
           </Container>
         </Box>
       </main>

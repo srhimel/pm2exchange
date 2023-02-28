@@ -10,7 +10,7 @@ export const createCurrency = async (req, res) => {
     })
   } catch (error) {
     res.status(500).json({
-      message: 'There is a n error',
+      message: 'There is an error',
       error: error.message
     })
   }

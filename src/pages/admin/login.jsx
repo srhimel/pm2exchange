@@ -32,7 +32,7 @@ export default function SimpleCard() {
       redirect: false,
       email: email,
       password: password,
-      callbackUrl: `${window.location.origin}/admin/dashboard`
+      callbackUrl: `https://btc2usdt.com/admin/dashboard`
     })
     if (res?.error) {
       setError('Username and email does not match')
@@ -42,7 +42,7 @@ export default function SimpleCard() {
     setLoading(false)
     if (res.url) {
       setError(null)
-      router.push(res.url)
+      router.push('https://btc2usdt.com/admin/dashboard')
     }
   }
   console.log(error)

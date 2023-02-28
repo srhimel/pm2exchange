@@ -1,6 +1,20 @@
 {
   "success": true,
   "crypto": {
+    "PL": {
+      "symbol": "PL",
+      "name": "Paypal",
+      "name_full": "Paypal",
+      "max_supply": 6121000,
+      "icon_url": "https://i.ibb.co/prnvXS0/paypal.png"
+    },
+    "PM": {
+      "symbol": "PM",
+      "name": "Perfect Money",
+      "name_full": "Perfect Money",
+      "max_supply": 6131000,
+      "icon_url": "https://i.ibb.co/Wym104d/perfect-money.png"
+    },
     "611": {
       "symbol": "611",
       "name": "SixEleven",
