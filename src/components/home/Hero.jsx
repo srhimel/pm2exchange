@@ -18,7 +18,8 @@ import {
   Select,
   HStack,
   NumberInput,
-  NumberInputField
+  NumberInputField,
+  Skeleton
 } from '@chakra-ui/react'
 import axios from 'axios'
 import Image from 'next/image'
@@ -50,7 +51,7 @@ export default function Hero({ data, isLoading }) {
           <Text color={'green.900'} fontSize='xl' mt={'25px !important'}>
             Instant exchanges, make your exchange or payment now
           </Text>
-          <CurrencyForm items={items} data={data} />
+          <CurrencyForm items={items} data={data} isLoading={isLoading} />
         </Stack>
       </Container>
       <Explain />
@@ -58,7 +59,7 @@ export default function Hero({ data, isLoading }) {
   )
 }
 
-export const CurrencyForm = ({ items, data }) => {
+export const CurrencyForm = ({ items, data, isLoading }) => {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [currencyOneKey, setCurrencyOneKey] = useState('')
@@ -143,47 +144,51 @@ export const CurrencyForm = ({ items, data }) => {
         spacing={{ base: '16px', md: '24px' }}
         align={'center'}>
         <Box w='full'>
-          <InputGroup size={'lg'}>
-            <InputLeftAddon children='From' bg={'gray.50'} w={20} />
-            <Select
-              placeholder='Select option'
-              roundedBottomEnd={5}
-              roundedTopEnd={5}
-              roundedTopStart={0}
-              roundedBottomStart={0}
-              onChange={(e) => handleCurrencyOneChange(e)}>
-              {items?.length
-                ? items.map((item) => (
-                    <option value={JSON.stringify(item)} key={item.key}>
-                      {item.label} - {item.key}
-                    </option>
-                  ))
-                : ''}
-            </Select>
-          </InputGroup>
+          <Skeleton isLoaded={!isLoading}>
+            <InputGroup size={'lg'}>
+              <InputLeftAddon children='From' bg={'gray.50'} w={20} />
+              <Select
+                placeholder='Select option'
+                roundedBottomEnd={5}
+                roundedTopEnd={5}
+                roundedTopStart={0}
+                roundedBottomStart={0}
+                onChange={(e) => handleCurrencyOneChange(e)}>
+                {items?.length
+                  ? items.map((item) => (
+                      <option value={JSON.stringify(item)} key={item.key}>
+                        {item.label} - {item.key}
+                      </option>
+                    ))
+                  : ''}
+              </Select>
+            </InputGroup>
+          </Skeleton>
         </Box>
         <Box display={{ base: 'none', md: 'flex' }}>
           <ChevronRightIcon w={8} h={8} color={'green.500'} />
         </Box>
         <Box w='full'>
-          <InputGroup size={'lg'}>
-            <InputLeftAddon children='To' bg={'gray.50'} w={20} />
-            <Select
-              placeholder='Select option'
-              roundedBottomEnd={5}
-              roundedTopEnd={5}
-              roundedTopStart={0}
-              roundedBottomStart={0}
-              onChange={(e) => handleCurrencyTwoChange(e)}>
-              {items?.length
-                ? items.map((item) => (
-                    <option value={JSON.stringify(item)} key={item.key}>
-                      {item.label} - {item.key}
-                    </option>
-                  ))
-                : ''}
-            </Select>
-          </InputGroup>
+          <Skeleton isLoaded={!isLoading}>
+            <InputGroup size={'lg'}>
+              <InputLeftAddon children='To' bg={'gray.50'} w={20} />
+              <Select
+                placeholder='Select option'
+                roundedBottomEnd={5}
+                roundedTopEnd={5}
+                roundedTopStart={0}
+                roundedBottomStart={0}
+                onChange={(e) => handleCurrencyTwoChange(e)}>
+                {items?.length
+                  ? items.map((item) => (
+                      <option value={JSON.stringify(item)} key={item.key}>
+                        {item.label} - {item.key}
+                      </option>
+                    ))
+                  : ''}
+              </Select>
+            </InputGroup>
+          </Skeleton>
         </Box>
       </Stack>
       {currencyOneKey && currencyTwoKey ? (
