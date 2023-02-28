@@ -10,10 +10,42 @@ import {
   Button,
   Heading,
   Text,
-  useColorModeValue
+  useColorModeValue,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { signIn } from 'next-auth/react'
 
 export default function SimpleCard() {
+  const router = useRouter()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const handleLogin = async () => {
+    setLoading(true)
+    const res = await signIn('credentials', {
+      redirect: false,
+      email: email,
+      password: password,
+      callbackUrl: `${window.location.origin}/admin/dashboard`
+    })
+    if (res?.error) {
+      setError('Username and email does not match')
+    } else {
+      setError(null)
+    }
+    setLoading(false)
+    if (res.url) {
+      setError(null)
+      router.push(res.url)
+    }
+  }
+  console.log(error)
   return (
     <Flex
       minH={'100vh'}
@@ -34,13 +66,17 @@ export default function SimpleCard() {
           p={8}>
           <Stack spacing={4}>
             <FormControl id='email'>
-              <FormLabel>Username</FormLabel>
-              <Input type='text' />
+              <FormLabel>Email Address</FormLabel>
+              <Input type='email' onChange={(e) => setEmail(e.target.value)} />
             </FormControl>
             <FormControl id='password'>
               <FormLabel>Password</FormLabel>
-              <Input type='password' />
+              <Input
+                type='password'
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </FormControl>
+
             <Stack spacing={10}>
               <Stack
                 direction={{ base: 'column', sm: 'row' }}
@@ -48,7 +84,21 @@ export default function SimpleCard() {
                 justify={'space-between'}>
                 <Checkbox>Remember me</Checkbox>
               </Stack>
-              <Button colorScheme={'green'}>Sign in</Button>
+              {error ? (
+                <Alert status='error'>
+                  <AlertIcon />
+                  <AlertTitle>Email or password is incorrect!</AlertTitle>
+                </Alert>
+              ) : (
+                <></>
+              )}
+
+              <Button
+                colorScheme={'green'}
+                onClick={handleLogin}
+                isLoading={loading}>
+                Sign in
+              </Button>
             </Stack>
           </Stack>
         </Box>

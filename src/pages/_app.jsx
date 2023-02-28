@@ -2,6 +2,7 @@ import CoinProvider from '@/lib/provider/CoinProvider'
 import '@/styles/globals.css'
 import { ChakraProvider } from '@chakra-ui/react'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { SessionProvider } from 'next-auth/react'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -10,14 +11,22 @@ const queryClient = new QueryClient({
     }
   }
 })
-export default function App({ Component, pageProps }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps }
+}) {
   const getLayout = Component.getLayout || ((page) => page)
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider>
-        <CoinProvider> {getLayout(<Component {...pageProps} />)}</CoinProvider>
-      </ChakraProvider>
-    </QueryClientProvider>
+    <SessionProvider session={session}>
+      <QueryClientProvider client={queryClient}>
+        <ChakraProvider>
+          <CoinProvider>
+            {' '}
+            {getLayout(<Component {...pageProps} />)}
+          </CoinProvider>
+        </ChakraProvider>
+      </QueryClientProvider>
+    </SessionProvider>
   )
 }
