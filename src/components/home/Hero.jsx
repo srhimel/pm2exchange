@@ -19,7 +19,10 @@ import {
   HStack,
   NumberInput,
   NumberInputField,
-  Skeleton
+  Skeleton,
+  Alert,
+  AlertIcon,
+  AlertTitle
 } from '@chakra-ui/react'
 import axios from 'axios'
 import Image from 'next/image'
@@ -71,6 +74,7 @@ export const CurrencyForm = ({ items, data, isLoading }) => {
   const [walletAddress, setWalletAddress] = useState('')
   const [emailAddress, setEmailAddress] = useState('')
   const [conversionRate, setConversionRate] = useState(0)
+  const [error, setError] = useState('')
 
   const getCurrencyIcon = (key) => {
     const item = items.find((i) => i.key === key)
@@ -122,19 +126,33 @@ export const CurrencyForm = ({ items, data, isLoading }) => {
   }
 
   const handleFormSubmit = () => {
-    setLoading(true)
-    axios
-      .post('/api/conversion', {
-        currencyFrom: currencyOne,
-        currencyTo: currencyTwo,
-        givenAmount,
-        receiveAmount,
-        walletAddress,
-        emailAddress,
-        conversionRate
-      })
-      .then((res) => router.push(`/step-2?id=${res.data._id}`))
-      .finally(() => setLoading(false))
+    if (walletAddress && givenAmount) {
+      setLoading(true)
+
+      axios
+        .post('/api/conversion', {
+          currencyFrom: currencyOne,
+          currencyTo: currencyTwo,
+          givenAmount,
+          receiveAmount,
+          walletAddress,
+          emailAddress,
+          conversionRate
+        })
+        .then((res) => router.push(`/step-2?id=${res.data._id}`))
+        .finally(() => {
+          setError(null)
+          setLoading(false)
+        })
+    } else {
+      if (!walletAddress && !givenAmount) {
+        setError('Wallet Address and amount is required')
+      } else if (!walletAddress) {
+        setError('Wallet Address is required')
+      } else {
+        setError('Please select amount')
+      }
+    }
   }
 
   return (
@@ -255,6 +273,7 @@ export const CurrencyForm = ({ items, data, isLoading }) => {
             )}
           </Stack>
           <Input
+            required
             my='4'
             size={'lg'}
             placeholder={`Enter your ${getCurrencyName(
@@ -271,7 +290,14 @@ export const CurrencyForm = ({ items, data, isLoading }) => {
       ) : (
         <></>
       )}
-
+      {error ? (
+        <Alert status='error' mt={2}>
+          <AlertIcon />
+          <AlertTitle>{error}</AlertTitle>
+        </Alert>
+      ) : (
+        <></>
+      )}
       <Button
         colorScheme='green'
         w={'full'}

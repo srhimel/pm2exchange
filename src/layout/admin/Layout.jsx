@@ -36,6 +36,7 @@ import { ReactText } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { signOut } from 'next-auth/react'
 
 const LinkItems = [
   { name: 'Home', icon: FiHome, path: '/admin/dashboard' },
@@ -200,7 +201,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   alignItems='flex-start'
                   spacing='1px'
                   ml='2'>
-                  <Text fontSize='sm'>Justina Clark</Text>
+                  <Text fontSize='sm'>Mr Admin</Text>
                   <Text fontSize='xs' color='gray.600'>
                     Admin
                   </Text>
@@ -213,11 +214,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
             <MenuList
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}>
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem>Billing</MenuItem>
-              <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem onClick={signOut}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

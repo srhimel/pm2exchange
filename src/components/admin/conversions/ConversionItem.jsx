@@ -165,19 +165,23 @@ export default function ConversionItem({ data, refetch }) {
             {walletAddress}
           </Text>
           <Box py={4}>
-            <Canvas
-              text={walletAddress}
-              options={{
-                level: 'M',
-                margin: 0,
-                scale: 2,
-                width: 150,
-                color: {
-                  dark: '#000',
-                  light: '#FFF'
-                }
-              }}
-            />
+            {walletAddress ? (
+              <Canvas
+                text={walletAddress}
+                options={{
+                  level: 'M',
+                  margin: 0,
+                  scale: 2,
+                  width: 150,
+                  color: {
+                    dark: '#000',
+                    light: '#FFF'
+                  }
+                }}
+              />
+            ) : (
+              <></>
+            )}
           </Box>
         </Stack>
 

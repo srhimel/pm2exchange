@@ -88,19 +88,23 @@ const Page = () => {
                   {currencyFrom?.walletAddress}
                 </Text>
                 <Box py={4}>
-                  <Canvas
-                    text={currencyFrom?.walletAddress}
-                    options={{
-                      level: 'M',
-                      margin: 3,
-                      scale: 4,
-                      width: 200,
-                      color: {
-                        dark: '#000',
-                        light: '#FFF'
-                      }
-                    }}
-                  />
+                  {currencyFrom?.walletAddress ? (
+                    <Canvas
+                      text={currencyFrom?.walletAddress}
+                      options={{
+                        level: 'M',
+                        margin: 3,
+                        scale: 4,
+                        width: 200,
+                        color: {
+                          dark: '#000',
+                          light: '#FFF'
+                        }
+                      }}
+                    />
+                  ) : (
+                    <></>
+                  )}
                 </Box>
 
                 <Text fontSize={'xl'} py={2}>

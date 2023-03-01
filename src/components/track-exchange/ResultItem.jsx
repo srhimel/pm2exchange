@@ -1,15 +1,5 @@
-import {
-  Box,
-  Heading,
-  HStack,
-  List,
-  ListItem,
-  Text,
-  useDisclosure
-} from '@chakra-ui/react'
-import { useQRCode } from 'next-qrcode'
+import { Box, Heading, HStack, List, ListItem, Text } from '@chakra-ui/react'
 import Image from 'next/image'
-import { useRef, useState } from 'react'
 
 export default function ResultItem({ data }) {
   const {
@@ -48,8 +38,6 @@ export default function ResultItem({ data }) {
       return 'white'
     }
   }
-
-  const { Canvas } = useQRCode()
   return (
     <>
       <Box

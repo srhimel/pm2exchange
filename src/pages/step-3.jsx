@@ -1,24 +1,17 @@
+import Layout from '@/layout'
 import {
   Box,
-  Button,
   Container,
-  Editable,
-  EditableInput,
-  EditablePreview,
   Grid,
   Heading,
-  HStack,
   Progress,
   Stack,
   Text
 } from '@chakra-ui/react'
-import Head from 'next/head'
-import React from 'react'
-import { useQRCode } from 'next-qrcode'
-import Image from 'next/image'
-import Layout from '@/layout'
-import { useRouter } from 'next/router'
 import axios from 'axios'
+import Head from 'next/head'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
 
 const Page = () => {
@@ -49,7 +42,6 @@ const Page = () => {
     conversionRate,
     status
   } = data || {}
-  const { Canvas } = useQRCode()
 
   const steps = [
     {
