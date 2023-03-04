@@ -24,7 +24,7 @@ export default NextAuth({
           password: credentials.password
         }
 
-        const res = await fetch('https://btc2usdt.com/api/admin-user', {
+        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/admin-user`, {
           method: 'PUT',
           body: JSON.stringify(payload),
           headers: {
@@ -48,7 +48,7 @@ export default NextAuth({
     // ...add more providers here
   ],
   secret: process.env.JWT_SECRET,
-  NEXTAUTH_URL: 'https://btc2usdt.com/',
+  NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   pages: {
     signIn: '/admin/login'
   },
