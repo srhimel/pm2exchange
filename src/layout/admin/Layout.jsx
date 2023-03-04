@@ -214,7 +214,14 @@ const MobileNav = ({ onOpen, ...rest }) => {
             <MenuList
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}>
-              <MenuItem onClick={signOut}>Sign out</MenuItem>
+              <MenuItem
+                onClick={() =>
+                  signOut({
+                    callbackUrl: 'https://btc2usdt.com'
+                  })
+                }>
+                Sign out
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>

@@ -33,7 +33,7 @@ export default function SimpleCard() {
       redirect: false,
       email: email,
       password: password,
-      callbackUrl: `${process.env.NEXTAUTH_URL}/admin/dashboard`
+      callbackUrl: `https://btc2usdt.com/admin/dashboard`
     })
     if (res?.error) {
       setError('Username and email does not match')
@@ -43,7 +43,7 @@ export default function SimpleCard() {
     setLoading(false)
     if (res.url) {
       setError(null)
-      router.push(`${process.env.NEXTAUTH_URL}/admin/dashboard`)
+      router.push(`https://btc2usdt.com/admin/dashboard`)
     }
   }
   console.log(error)
