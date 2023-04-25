@@ -164,7 +164,7 @@ export const CurrencyForm = ({ items, data, isLoading }) => {
         <Box w='full'>
           <Skeleton isLoaded={!isLoading}>
             <InputGroup size={'lg'}>
-              <InputLeftAddon children='From' bg={'gray.50'} w={20} />
+              <InputLeftAddon children='You Send' bg={'gray.50'} w={32} />
               <Select
                 placeholder='Select option'
                 roundedBottomEnd={5}
@@ -189,7 +189,7 @@ export const CurrencyForm = ({ items, data, isLoading }) => {
         <Box w='full'>
           <Skeleton isLoaded={!isLoading}>
             <InputGroup size={'lg'}>
-              <InputLeftAddon children='To' bg={'gray.50'} w={20} />
+              <InputLeftAddon children='You Receive' bg={'gray.50'} w={32} />
               <Select
                 placeholder='Select option'
                 roundedBottomEnd={5}

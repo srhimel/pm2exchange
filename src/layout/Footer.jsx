@@ -14,6 +14,7 @@ import {
 import { ReactNode } from 'react'
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
 import { BiMailSend } from 'react-icons/bi'
+import Image from 'next/image'
 
 const Logo = (props) => {
   return (
@@ -76,7 +77,14 @@ export default function Footer() {
           spacing={8}>
           <Stack spacing={6}>
             <Box>
-              <Text fontSize={'xl'}>BTC2USDT</Text>
+              <Text fontSize={'xl'}>
+                <Image
+                  src='/btctousdt.png'
+                  alt='btc2usdt'
+                  height={40}
+                  width={150}
+                />
+              </Text>
             </Box>
             <Text fontSize={'sm'}>
               Copyright &copy; 2023 BTC2USD. All Rights Reserved

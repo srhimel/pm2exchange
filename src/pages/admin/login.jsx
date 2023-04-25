@@ -18,11 +18,13 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import Head from 'next/head'
 
 export default function SimpleCard() {
   const router = useRouter()
+  const { status } = useSession()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -46,6 +48,10 @@ export default function SimpleCard() {
       router.push(`https://btc2usdt.com/admin/dashboard`)
     }
   }
+  if (status === 'loading') {
+    return <>Loading....</>
+  }
+  if (status === 'authenticated') router.push('/admin/dashboard')
   console.log(error)
   return (
     <>
@@ -55,11 +61,7 @@ export default function SimpleCard() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Flex
-        minH={'100vh'}
-        align={'center'}
-        justify={'center'}
-        bg={useColorModeValue('gray.50', 'gray.800')}>
+      <Flex minH={'100vh'} align={'center'} justify={'center'} bg={'gray.50'}>
         <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
           <Stack align={'center'}>
             <Heading fontSize={'4xl'}>Sign in to your account</Heading>
@@ -67,11 +69,7 @@ export default function SimpleCard() {
               to enjoy all of our cool features ✌️
             </Text>
           </Stack>
-          <Box
-            rounded={'lg'}
-            bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={'lg'}
-            p={8}>
+          <Box rounded={'lg'} bg={'white'} boxShadow={'lg'} p={8}>
             <Stack spacing={4}>
               <FormControl id='email'>
                 <FormLabel>Email Address</FormLabel>

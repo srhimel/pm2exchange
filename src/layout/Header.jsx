@@ -22,6 +22,7 @@ import {
   ChevronRightIcon
 } from '@chakra-ui/icons'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Header() {
   const { isOpen, onToggle } = useDisclosure()
@@ -30,12 +31,22 @@ export default function Header() {
     <Box bg={useColorModeValue('green.100')}>
       <Container maxW={'container.xl'} py={3}>
         <Flex minH={'60px'} align={'center'}>
-          <Flex flex={{ base: 1 }} justify={{ base: 'start', md: 'start' }}>
+          <Flex
+            flex={{ base: 1 }}
+            justify={{ base: 'start', md: 'start' }}
+            alignItems='center'>
             <Text
               textAlign={{ base: 'left', md: 'left' }}
               fontFamily={'heading'}
               color={useColorModeValue('gray.800', 'white')}>
-              <Link href='/'>BTC2USDT</Link>
+              <Link href='/'>
+                <Image
+                  src='/btctousdt.png'
+                  alt='btc2usdt'
+                  height={40}
+                  width={150}
+                />
+              </Link>
             </Text>
 
             <Flex display={{ base: 'none', md: 'flex' }} ml={'auto'}>
