@@ -19,7 +19,7 @@ const steps = [
   {
     key: 'step-2',
     step: 2,
-    details: 'Transfer to your temporary BTC2USDT.com address.'
+    details: 'Transfer to your temporary pm2exchange.com address.'
   },
   {
     key: 'step-3',

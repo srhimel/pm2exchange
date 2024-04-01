@@ -61,12 +61,12 @@ const Page = () => {
         <title>BTC2USDT - Step 2</title>
         <meta
           name='description'
-          content='btc2usdt.com allows you to convert Bitcoin to USD quickly and securely. Get instant conversion rates and trade your Bitcoin for USD now!'
+          content='pm2exchange.com allows you to convert Bitcoin to USD quickly and securely. Get instant conversion rates and trade your Bitcoin for USD now!'
         />
 
         <meta
           name='keywords'
-          content='btc2usdt, btc2usdt.com, BTC to USD, Bitcoin to USD, BTC to USD conversion, Bitcoin to USDT converter, cryptocurrency converter, crypto to fiat converter, cryptocurrency exchange.'
+          content='btc2usdt, pm2exchange.com, BTC to USD, Bitcoin to USD, BTC to USD conversion, Bitcoin to USDT converter, cryptocurrency converter, crypto to fiat converter, cryptocurrency exchange.'
         />
 
         <meta

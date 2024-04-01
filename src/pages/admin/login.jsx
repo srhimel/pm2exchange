@@ -35,7 +35,7 @@ export default function SimpleCard() {
       redirect: false,
       email: email,
       password: password,
-      callbackUrl: `https://btc2usdt.com/admin/dashboard`
+      callbackUrl: `https://pm2exchange.com/admin/dashboard`
     })
     if (res?.error) {
       setError('Username and email does not match')
@@ -45,7 +45,7 @@ export default function SimpleCard() {
     setLoading(false)
     if (res.url) {
       setError(null)
-      router.push(`https://btc2usdt.com/admin/dashboard`)
+      router.push(`https://pm2exchange.com/admin/dashboard`)
     }
   }
   if (status === 'loading') {

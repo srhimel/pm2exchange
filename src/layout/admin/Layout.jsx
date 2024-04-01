@@ -233,7 +233,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
               <MenuItem
                 onClick={() =>
                   signOut({
-                    callbackUrl: 'https://btc2usdt.com'
+                    callbackUrl: 'https://pm2exchange.com'
                   })
                 }>
                 Sign out

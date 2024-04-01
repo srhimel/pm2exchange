@@ -44,7 +44,7 @@ export default function Works() {
         />
         <Work
           icon={<Icon as={RiNumber2} w={10} h={10} />}
-          text={'Transfer to your temporary BTC2USDT.com address.'}
+          text={'Transfer to your temporary pm2exchange.com address.'}
         />
         <Work
           icon={<Icon as={RiNumber3} w={10} h={10} />}
