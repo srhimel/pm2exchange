@@ -43,8 +43,8 @@ export default function Header() {
                 <Image
                   src='/btctousdt.png'
                   alt='Pm2exchanget'
-                  height={40}
-                  width={150}
+                  height={60}
+                  width={250}
                 />
               </Link>
             </Text>
