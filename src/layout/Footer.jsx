@@ -80,14 +80,14 @@ export default function Footer() {
               <Text fontSize={'xl'}>
                 <Image
                   src='/btctousdt.png'
-                  alt='btc2usdt'
+                  alt='Pm2exchanget'
                   height={40}
                   width={150}
                 />
               </Text>
             </Box>
             <Text fontSize={'sm'}>
-              Copyright &copy; 2023 BTC2USD. All Rights Reserved
+              Copyright &copy; 2023 Pm2exchange. All Rights Reserved
             </Text>
             {/* <Stack direction={'row'} spacing={6}>
               <SocialButton label={'Twitter'} href={'#'}>

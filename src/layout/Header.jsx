@@ -42,7 +42,7 @@ export default function Header() {
               <Link href='/'>
                 <Image
                   src='/btctousdt.png'
-                  alt='btc2usdt'
+                  alt='Pm2exchanget'
                   height={40}
                   width={150}
                 />

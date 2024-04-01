@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>BTC2USDT</title>
+        <title>Pm2exchangeT</title>
         <meta
           name='description'
           content='pm2exchange.com allows you to convert Bitcoin to USD quickly and securely. Get instant conversion rates and trade your Bitcoin for USD now!'
@@ -27,7 +27,7 @@ export default function Home() {
 
         <meta
           name='keywords'
-          content='btc2usdt, pm2exchange.com, BTC to USD, Bitcoin to USD, BTC to USD conversion, Bitcoin to USDT converter, cryptocurrency converter, crypto to fiat converter, cryptocurrency exchange.'
+          content='Pm2exchanget, pm2exchange.com, BTC to USD, Bitcoin to USD, BTC to USD conversion, Bitcoin to USDT converter, cryptocurrency converter, crypto to fiat converter, cryptocurrency exchange.'
         />
 
         <meta
