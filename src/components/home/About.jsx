@@ -16,7 +16,7 @@ const About = (props) => {
       <Container maxW={'container.xl'}>
         <Box maxW={'3xl'} margin='auto'>
           <Heading as='h2' size='2xl' textAlign={'center'} color='green.600'>
-            What is Pm2exchangeT?
+            What is Pm2exchange?
           </Heading>
           <Text
             color={'gray.600'}
@@ -24,7 +24,7 @@ const About = (props) => {
             mt={'25px !important'}
             textAlign='center'
             fontWeight={'light'}>
-            Pm2exchangeT is the one thing missing from the cryptocurrency world.
+            Pm2exchange is the one thing missing from the cryptocurrency world.
             It offers easy, fast and secure exchanges of the most popular
             cryptocurrencies.
           </Text>

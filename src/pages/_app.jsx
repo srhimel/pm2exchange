@@ -24,7 +24,7 @@ export default function App({
           <CoinProvider>
             {' '}
             {getLayout(<Component {...pageProps} />)}
-            <Script src='//code.jivosite.com/widget/HNH8F2UB3y' async />
+            <script src='//code.jivosite.com/widget/HNH8F2UB3y' async></script>
           </CoinProvider>
         </ChakraProvider>
       </QueryClientProvider>

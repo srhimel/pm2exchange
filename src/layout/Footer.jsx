@@ -80,7 +80,7 @@ export default function Footer() {
               <Text fontSize={'xl'}>
                 <Image
                   src='/btctousdt.png'
-                  alt='Pm2exchanget'
+                  alt='Pm2exchange'
                   height={60}
                   width={250}
                 />

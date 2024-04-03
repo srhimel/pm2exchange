@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>Pm2exchangeT</title>
+        <title>Pm2exchange</title>
         <meta
           name='description'
           content='pm2exchange.com allows you to convert Bitcoin to USD quickly and securely. Get instant conversion rates and trade your Bitcoin for USD now!'
@@ -15,7 +15,7 @@ export default function Page() {
 
         <meta
           name='keywords'
-          content='Pm2exchanget, pm2exchange.com, BTC to USD, Bitcoin to USD, BTC to USD conversion, Bitcoin to USDT converter, cryptocurrency converter, crypto to fiat converter, cryptocurrency exchange.'
+          content='Pm2exchange, pm2exchange.com, BTC to USD, Bitcoin to USD, BTC to USD conversion, Bitcoin to USDT converter, cryptocurrency converter, crypto to fiat converter, cryptocurrency exchange.'
         />
 
         <meta
@@ -40,10 +40,10 @@ export default function Page() {
             <Text color={'green.900'} fontSize='xl' mt={'25px !important'}>
               Email us:{' '}
               <a
-                href='mailto:Pm2exchangetofficial@gmail.com'
+                href='mailto:Pm2exchangeofficial@gmail.com'
                 target='_blank'
                 rel='noreferrer'>
-                Pm2exchangetofficial@gmail.com
+                Pm2exchangeofficial@gmail.com
               </a>
             </Text>
           </Container>
