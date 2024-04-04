@@ -24,7 +24,7 @@ export default NextAuth({
           password: credentials.password
         }
 
-        const res = await fetch(`https://www.pm2exchange.com/api/admin-user`, {
+        const res = await fetch(`https://pm2exchange.com/api/admin-user`, {
           method: 'PUT',
           body: JSON.stringify(payload),
           headers: {
@@ -48,7 +48,7 @@ export default NextAuth({
     // ...add more providers here
   ],
   secret: process.env.JWT_SECRET,
-  NEXTAUTH_URL: 'https://www.pm2exchange.com',
+  NEXTAUTH_URL: 'https://pm2exchange.com',
   pages: {
     signIn: '/admin/login'
   },
